@@ -22,3 +22,27 @@ Test Execution: SUCCESS
 1 tests, 1 passed, 
 0 failed, 0 skipped
             
+Total time of testJoinNotifyDeadlock was 589 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
+Total time of testRecursiveJoinThreadGroup was 7350 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
+Total time of testRecursiveJoinThreadGroup was 1040 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
+Total time of testRecursiveJoinThreadGroup was 923 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            

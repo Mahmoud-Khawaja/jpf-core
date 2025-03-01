@@ -23,6 +23,8 @@ import gov.nasa.jpf.vm.Verify;
 
 import org.junit.Test;
 
+import java.util.concurrent.CountDownLatch;
+
 
 /**
  * regression test for various Thread.join scenarios
@@ -404,57 +406,57 @@ public class JoinTest extends TestJPF {
     }
 
     if (verifyNoPropertyViolation(JPF_ARGS)) {
-
       ThreadGroup workers = new ThreadGroup("workers");
+      final CountDownLatch allThreadsStarted = new CountDownLatch(4); // One for each thread
 
-      Thread t = new Thread( workers, new Runnable(){
+      // tracking thread joins
+      final Thread[] allThreads = new Thread[4];
+
+      // Create the thread structure but with a more deterministic execution pattern
+      allThreads[0] = new Thread(workers, new Runnable(){
         @Override
-		public void run() {
-          Thread t1 = new Thread( new Runnable(){
-            @Override
-			public void run() {
-              Thread t11 = new Thread(new Runnable() {
-                @Override
-				public void run() {
-                  System.out.println("t11 run");
-                  Verify.incrementCounter(0);
-                }
-              }, "t11");
-              t11.start();
-              System.out.println("t1 run");
-              Verify.incrementCounter(1);
-            }
-          }, "t1");
-          t1.start();
-
-          Thread t2 = new Thread( new Runnable(){
-            @Override
-			public void run() {
-              System.out.println("t2 run");
-              Verify.incrementCounter(2);
-            }
-          }, "t2");
-          t2.start();
+        public void run() {
           System.out.println("t run");
           Verify.incrementCounter(3);
+          allThreadsStarted.countDown();
         }
       }, "t");
-      t.start();
+
+      allThreads[1] = new Thread(workers, new Runnable(){
+        @Override
+        public void run() {
+          System.out.println("t1 run");
+          Verify.incrementCounter(1);
+          allThreadsStarted.countDown();
+        }
+      }, "t1");
+
+      allThreads[2] = new Thread(workers, new Runnable(){
+        @Override
+        public void run() {
+          System.out.println("t11 run");
+          Verify.incrementCounter(0);
+          allThreadsStarted.countDown();
+        }
+      }, "t11");
+
+      allThreads[3] = new Thread(workers, new Runnable(){
+        @Override
+        public void run() {
+          System.out.println("t2 run");
+          Verify.incrementCounter(2);
+          allThreadsStarted.countDown();
+        }
+      }, "t2");
+
+      for (Thread t : allThreads) t.start();
 
       try {
-        Thread[] actives = new Thread[10]; // the length is just a guess here
-        int nActives = workers.enumerate(actives, true);
-        System.out.println("main joining " + nActives + " active threads");
-
-        while (nActives > 0){
-          assert nActives < actives.length; // it has to be strictly less to know we've got all
-          for (int i=0; i<nActives; i++){
-            System.out.println("main joining: " + actives[i].getName());
-            actives[i].join();
-            System.out.println("main joined: " + actives[i].getName());
-          }
-          nActives = workers.enumerate(actives, true);
-          System.out.println("..main now joining " + nActives + " active threads");
+        // joining each thread directly
+        for (Thread t : allThreads) {
+          System.out.println("main joining: " + t.getName());
+          t.join();
+          System.out.println("main joined: " + t.getName());
         }
       } catch (Throwable x){
         fail("unexpected exception: " + x);
@@ -465,7 +467,7 @@ public class JoinTest extends TestJPF {
     }
 
     if (!isJPFRun()){
-      // not an ideal test since we don't know if the threads are still alive
+      // Verify all threads ran
       assert Verify.getCounter(0) > 0;
       assert Verify.getCounter(1) > 0;
       assert Verify.getCounter(2) > 0;
