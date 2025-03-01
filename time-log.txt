@@ -46,3 +46,27 @@ Test Execution: SUCCESS
 1 tests, 1 passed, 
 0 failed, 0 skipped
             
+Total time of testStackWalkerInCaseOfChoiceGenerator was 3998 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
+Total time of testStackWalkerInCaseOfChoiceGenerator was 3949 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
+Total time of testStackWalkerInCaseOfChoiceGenerator was 947 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
+Total time of testStackWalkerInCaseOfChoiceGenerator was 890 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
