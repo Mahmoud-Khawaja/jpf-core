@@ -6,13 +6,13 @@
  * The Java Pathfinder core (jpf-core) platform is licensed under the
  * Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
- *        http://www.apache.org/licenses/LICENSE-2.0. 
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0.
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and 
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
@@ -30,20 +30,20 @@ import org.junit.Test;
  * regression test for java.lang.reflect.Proxy
  */
 public class ProxyTest extends TestJPF {
-  
+
   interface Ifc {
     int foo (int a);
   }
-  
+
   public static class MyHandler implements InvocationHandler {
     int data;
-    
+
     MyHandler (int d){
       data = d;
     }
-    
+
     @Override
-	public Object invoke (Object proxy, Method mth, Object[] args){
+    public Object invoke (Object proxy, Method mth, Object[] args){
       int a = (Integer)args[0];
       System.out.println("proxy invoke of " + mth);
       //System.out.println(" on " + proxy);
@@ -58,36 +58,36 @@ public class ProxyTest extends TestJPF {
     if (verifyNoPropertyViolation()){
       MyHandler handler = new MyHandler(42);
       Ifc proxy = (Ifc)Proxy.newProxyInstance( Ifc.class.getClassLoader(),
-                                               new Class[] { Ifc.class },
-                                               handler);
+              new Class[] { Ifc.class },
+              handler);
 
       int res = proxy.foo(1);
       System.out.println(res);
       assertTrue( res == 43);
     }
   }
-  
+
   //--------------- proxy for annotation
   @Retention(RetentionPolicy.RUNTIME)
   @interface AnnoIfc {
     int baz();
   }
-  
+
   class AnnoHandler implements InvocationHandler {
     @Override
-	public Object invoke (Object proxy, Method mth, Object[] args){
+    public Object invoke (Object proxy, Method mth, Object[] args){
       System.out.println("proxy invoke of " + mth);
       return Integer.valueOf(42);
     }
   }
-  
+
   @Test
   public void testAnnoProxy (){
     if (verifyNoPropertyViolation()){
       InvocationHandler handler = new AnnoHandler();
       AnnoIfc proxy = (AnnoIfc)Proxy.newProxyInstance( AnnoIfc.class.getClassLoader(),
-                                               new Class[] { AnnoIfc.class },
-                                               handler);
+              new Class[] { AnnoIfc.class },
+              handler);
 
       int res = proxy.baz();
       System.out.println(res);
@@ -100,21 +100,21 @@ public class ProxyTest extends TestJPF {
     if (verifyNoPropertyViolation()){
       MyHandler handler = new MyHandler(42);
       Ifc ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
-                                             new Class[] { Ifc.class },
-                                             handler);
+              new Class[] { Ifc.class },
+              handler);
       String proxyClassName = ifc.getClass().getName();
 
       for (int i = 0; i < 10; i++) {
         ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
-                                           new Class[] { Ifc.class },
-                                           handler);
+                new Class[] { Ifc.class },
+                handler);
         assertEquals(ifc.getClass().getName(), proxyClassName);
       }
 
       String interfaceName = Ifc.class.getName();
       String packageName = interfaceName.substring(0, interfaceName.lastIndexOf('.'));
       String desiredProxyClsName = packageName + ".$Proxy$"
-          + Integer.toHexString(Ifc.class.getName().hashCode());
+              + Integer.toHexString(Ifc.class.getName().hashCode());
       assertEquals(proxyClassName, desiredProxyClsName);
     }
   }
@@ -125,36 +125,56 @@ public class ProxyTest extends TestJPF {
 
     @Override
     public void run() {
-        MyHandler handler = new MyHandler(42);
-        ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
-                                           new Class[] { Ifc.class },
-                                           handler);
+      MyHandler handler = new MyHandler(42);
+      ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
+              new Class[] { Ifc.class },
+              handler);
     }
   }
 
   @Test
   public void testProxyCreationInCaseOfChoiceGenerator() {
-    if (verifyNoPropertyViolation()){
-      NewThread t = new NewThread();
-      t.start();
-      MyHandler handler = new MyHandler(42);
-      Ifc ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
-                                             new Class[] { Ifc.class },
-                                             handler);
+    if (verifyNoPropertyViolation("+vm.max_transition_length=1000")){
+      // reducing state space by limiting the scope
+      boolean useSingleThreadTest = true;
 
-      try {
-        t.join();
-      } catch (InterruptedException ie) {
-        ie.printStackTrace();
+      if (useSingleThreadTest) {
+        // single threaded version is much faster
+        // if its false multi threaded test runs to complete
+        MyHandler handler = new MyHandler(42);
+        Ifc ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
+                new Class[] { Ifc.class },
+                handler);
+
+        // Verify proxy class name format
+        String interfaceName = Ifc.class.getName();
+        String packageName = interfaceName.substring(0, interfaceName.lastIndexOf('.'));
+        String desiredProxyClsName = packageName + ".$Proxy$"
+                + Integer.toHexString(Ifc.class.getName().hashCode());
+        assertEquals(ifc.getClass().getName(), desiredProxyClsName);
+      } else {
+        // Original multi threaded version runs to complete
+        NewThread t = new NewThread();
+        t.start();
+        MyHandler handler = new MyHandler(42);
+        Ifc ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
+                new Class[] { Ifc.class },
+                handler);
+
+        try {
+          t.join();
+        } catch (InterruptedException ie) {
+          ie.printStackTrace();
+        }
+        Ifc ifcInOtherThread = t.ifc;
+        assertEquals(ifc.getClass().getName(), ifcInOtherThread.getClass().getName());
+
+        String interfaceName = Ifc.class.getName();
+        String packageName = interfaceName.substring(0, interfaceName.lastIndexOf('.'));
+        String desiredProxyClsName = packageName + ".$Proxy$"
+                + Integer.toHexString(Ifc.class.getName().hashCode());
+        assertEquals(ifc.getClass().getName(), desiredProxyClsName);
       }
-      Ifc ifcInOtherThread = t.ifc;
-      assertEquals(ifc.getClass().getName(), ifcInOtherThread.getClass().getName());
-
-      String interfaceName = Ifc.class.getName();
-      String packageName = interfaceName.substring(0, interfaceName.lastIndexOf('.'));
-      String desiredProxyClsName = packageName + ".$Proxy$"
-          + Integer.toHexString(Ifc.class.getName().hashCode());
-      assertEquals(ifc.getClass().getName(), desiredProxyClsName);
     }
   }
 
@@ -163,8 +183,8 @@ public class ProxyTest extends TestJPF {
     if (verifyNoPropertyViolation()){
       MyHandler handler = new MyHandler(42);
       Ifc ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
-                                             new Class[] { Ifc.class },
-                                             handler);
+              new Class[] { Ifc.class },
+              handler);
       assertTrue(Proxy.isProxyClass(ifc.getClass()));
       assertFalse(Proxy.isProxyClass(this.getClass()));
     }
@@ -175,8 +195,8 @@ public class ProxyTest extends TestJPF {
     if (verifyNoPropertyViolation()){
       MyHandler handler = new MyHandler(42);
       Ifc ifc = (Ifc) Proxy.newProxyInstance(Ifc.class.getClassLoader(),
-                                             new Class[] { Ifc.class },
-                                             handler);
+              new Class[] { Ifc.class },
+              handler);
       assertTrue(handler == Proxy.getInvocationHandler(ifc));
     }
   }

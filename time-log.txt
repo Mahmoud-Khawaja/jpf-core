@@ -1,0 +1,24 @@
+Total time of testBasicProxy was 756 ms
+Total time of testGetInvocationHandler was 333 ms
+Total time of testProxyName was 280 ms
+Total time of testProxyCreationInCaseOfChoiceGenerator was 379 ms
+Total time of testProxyInvocation was 12 ms
+Total time of testIsProxyClass was 187 ms
+Total time of testAnnoProxy was 171 ms
+
+Test Execution: SUCCESS
+7 tests, 7 passed, 
+0 failed, 0 skipped
+            
+Total time of testProxyCreationInCaseOfChoiceGenerator was 947 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
+Total time of testProxyCreationInCaseOfChoiceGenerator was 869 ms
+
+Test Execution: SUCCESS
+1 tests, 1 passed, 
+0 failed, 0 skipped
+            
