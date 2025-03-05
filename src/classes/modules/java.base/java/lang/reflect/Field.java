@@ -24,15 +24,15 @@ public final class Field extends AccessibleObject implements Member {
   String name; // deferred set by the NativePeer getName()
 
   public String toGenericString() {
+    // returning pattern will be [modifiers] [type] [declaring class].[field name]
     StringBuilder sb = new StringBuilder();
-
     int modifiers = getModifiers();
     if (modifiers != 0) {
       sb.append(Modifier.toString(modifiers)).append(' ');
     }
 
-    String genericType = getGenericTypeName();
-    sb.append(genericType).append(' ');
+    Class<?> type = getType();
+    sb.append(type.getCanonicalName()).append(' ');
 
     Class<?> declaringClass = getDeclaringClass();
     String declaringClassName = declaringClass.getCanonicalName();
@@ -40,8 +40,7 @@ public final class Field extends AccessibleObject implements Member {
 
     return sb.toString();
   }
-  private native String getGenericTypeName();
-  
+
   public native boolean getBoolean (Object o) throws IllegalAccessException;
   public native void setBoolean (Object o, boolean v) throws IllegalAccessException;
 
