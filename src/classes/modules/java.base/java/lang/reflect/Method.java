@@ -30,10 +30,8 @@ public final class Method extends AccessibleObject implements Member {
 
   @Override
   public native String getName();
-  public native Type getGenericReturnType();
-
   public String toGenericString() {
-
+    // return type will be [modifiers] [return_type] [declaring_class].[method_name]([parameter_types]) [throws_clause]
     StringBuilder sb = new StringBuilder();
 
     int modifiers = getModifiers();
@@ -41,31 +39,28 @@ public final class Method extends AccessibleObject implements Member {
       sb.append(Modifier.toString(modifiers)).append(' ');
     }
 
-    // appending generic return type and method name
-    Type returnType = getGenericReturnType();
-    sb.append(returnType.getTypeName()).append(' ');
+    Class<?> returnType = getReturnType();
+    sb.append(returnType.getCanonicalName()).append(' ');
 
     Class<?> declaringClass = getDeclaringClass();
-    sb.append(declaringClass.getTypeName())
+    sb.append(declaringClass.getCanonicalName())
             .append('.')
             .append(getName());
 
-    // appending generic parameter types
-    Type[] paramTypes = getGenericParameterTypes();
+    Class<?>[] paramTypes = getParameterTypes();
     sb.append('(');
     for (int i = 0; i < paramTypes.length; i++) {
       if (i > 0) sb.append(", ");
-      sb.append(paramTypes[i].getTypeName());
+      sb.append(paramTypes[i].getCanonicalName());
     }
     sb.append(')');
 
-    // appending exceptions
     Class<?>[] exceptionTypes = getExceptionTypes();
     if (exceptionTypes.length > 0) {
       sb.append(" throws ");
       for (int i = 0; i < exceptionTypes.length; i++) {
         if (i > 0) sb.append(", ");
-        sb.append(exceptionTypes[i].getTypeName());
+        sb.append(exceptionTypes[i].getCanonicalName());
       }
     }
 
