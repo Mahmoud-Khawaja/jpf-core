@@ -25,7 +25,6 @@ import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class StackWalkerTest extends TestJPF {
@@ -103,25 +102,26 @@ public class StackWalkerTest extends TestJPF {
 
   @Test
   public void testStackWalkerInCaseOfChoiceGenerator() {
-    // not to explore unnecessary synchronization options
-    if (verifyNoPropertyViolation("+vm.scheduler.sync.detect=false")){
-
-      // AtomicInteger to track completions
-      AtomicInteger completionCounter = new AtomicInteger(0);
-
+    Object lock = this;
+    if (verifyNoPropertyViolation()){
       Thread t1 = new Thread() {
         @Override
         public void run() {
-          callIt();
-          completionCounter.incrementAndGet();
+          synchronized (lock) {
+            callIt();
+          }
+        }
+      };
+      Thread t2 = new Thread() {
+        @Override
+        public void run() {
+          synchronized (lock) {
+            callIt();
+          }
         }
       };
       t1.start();
-
-      // Wait for the thread to complete to ensure the test passes
-      while (completionCounter.get() < 1) {
-        Thread.yield();
-      }
+      t2.start();
     }
   }
 
