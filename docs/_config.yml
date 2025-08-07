@@ -10,11 +10,9 @@ collections:
   gsoc:
     output: true
     permalink: /gsoc/:name/
-    sort_by: date
   workshops:
     output: true
     permalink: /workshops/:name/
-    sort_by: date
 
 defaults:
   - scope:
