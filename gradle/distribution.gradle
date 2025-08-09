@@ -2,12 +2,12 @@ task srcDist(type: Zip) {
     group = "JPF Distribution"
     description = "Builds the source distribution."
 
-    baseName = project.name
-    version = project.version
-    classifier = "src"
-    extension = "zip"
+    archiveBaseName.set(project.name)
+    archiveVersion.set(project.version.toString())
+    archiveClassifier.set("src")
+    archiveExtension.set("zip")
 
-    destinationDir = buildDir
+    destinationDirectory.set(buildDir)
     includeEmptyDirs = false
 
     from projectDir
@@ -24,15 +24,16 @@ task srcDist(type: Zip) {
     include "README.md"
 }
 
+
 task dist(type: Zip) {
     group = "JPF Distribution"
     description = "Builds binary distribution."
 
-    baseName = project.name
-    version = project.version
-    extension = "zip"
+    archiveBaseName.set(project.name)
+    archiveVersion.set(project.version.toString())
+    archiveExtension.set("zip")
 
-    destinationDir = buildDir
+    destinationDirectory.set(buildDir)
     includeEmptyDirs = false
 
     from projectDir
@@ -42,4 +43,3 @@ task dist(type: Zip) {
     include "lib/**/*"
     include "${buildDir.name}/**/*.jar"
 }
-

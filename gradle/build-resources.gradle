@@ -13,7 +13,6 @@ task generateBuildInfo {
     group = "JPF Build Resources"
     description = "Generates the build.properties file."
     doLast {
-
         Properties info = new Properties()
 
         def status  = "git status --short".execute().text.trim()
@@ -42,9 +41,11 @@ task copyResources(type: Copy) {
     dependsOn generateBuildInfo
     dependsOn generateVersion
 
+    def mainOutputDir = sourceSets.main.java.destinationDirectory.get().asFile
+
     from "build.properties"
-    into sourceSets.main.java.outputDir.path + "/gov/nasa/jpf"
+    into "${mainOutputDir}/gov/nasa/jpf"
 
     from ".version"
-    into sourceSets.main.java.outputDir.path + "/gov/nasa/jpf"
+    into "${mainOutputDir}/gov/nasa/jpf"
 }

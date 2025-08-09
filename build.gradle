@@ -1,8 +1,8 @@
 apply plugin: "java"
 apply plugin: "maven-publish"
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
@@ -10,27 +10,64 @@ repositories {
 
 buildscript {
     repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath group: 'com.dmdirc', name: 'git-version', version: '1.1'
     }
 }
 
-dependencies {
-    testImplementation "junit:junit:4.12"
-    testCompile "org.ow2.asm:asm:7.1"
-}
-
-task copyLibs(type: Copy) {
-    from configurations.testCompile
-    into 'build'
-}
-
 apply plugin: "com.dmdirc.git-version"
 
+// -------------------
+// Source Sets
+// -------------------
+sourceSets {
+    annotations {
+        java.srcDirs = ["src/annotations"]
+    }
+    main {
+        java.srcDirs = ["src/main"]
+        compileClasspath += sourceSets.annotations.output
+    }
+    examples {
+        java.srcDirs = ["src/examples"]
+        compileClasspath += sourceSets.main.output
+    }
+    classes {
+        java.srcDirs = ["src/classes"]
+        compileClasspath += sourceSets.main.output + sourceSets.annotations.output
+    }
+    peers {
+        java.srcDirs = ["src/peers"]
+        compileClasspath += sourceSets.main.output + sourceSets.annotations.output
+    }
+    test {
+        java.srcDirs = ["src/tests"]
+        compileClasspath += sourceSets.annotations.output + sourceSets.classes.output + sourceSets.peers.output
+        runtimeClasspath += compileClasspath
+    }
+}
+
+// -------------------
+// Dependencies
+// -------------------
+dependencies {
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.ow2.asm:asm:7.1"
+}
+
+// -------------------
+// Copy Libraries Task
+// -------------------
+task copyLibs(type: Copy) {
+    from configurations.testRuntimeClasspath
+    into layout.buildDirectory.dir("libs")
+}
+
+// -------------------
+// Manifest Attributes
+// -------------------
 ext.manifestCommonAttrbutes = manifest {
     attributes(
             "Built-By": System.getProperty("user.name"),
@@ -40,35 +77,80 @@ ext.manifestCommonAttrbutes = manifest {
     )
 }
 
-apply from: "gradle/ide-support.gradle"
-apply from: "gradle/distribution.gradle"
-apply from: "gradle/source-sets.gradle"
-apply from: "gradle/build-resources.gradle"
+// -------------------
+// Build Resources Tasks
+// -------------------
+task generateVersion {
+    group = "JPF Build Resources"
+    description = "Generates the .version file with the current revision hash"
+    doLast {
+        def revision = "git rev-parse HEAD".execute().text
+        new File(".version").withWriter("utf-8") { writer ->
+            writer.writeLine revision
+        }
+    }
+}
 
+task generateBuildInfo {
+    group = "JPF Build Resources"
+    description = "Generates the build.properties file."
+    doLast {
+        Properties info = new Properties()
+
+        def status  = "git status --short".execute().text.trim()
+        def revision = "git rev-parse --short HEAD".execute().text.trim()
+        def userName = ["git", "log", "-1", "--format=%an <%ae>"].execute().text.trim()
+        def date = "git log -1 --format=%ci".execute().text.trim()
+
+        info.setProperty("revision", revision)
+        info.setProperty("date", date)
+        info.setProperty("author", userName)
+        info.setProperty("os.arch", System.getProperty("os.arch"))
+        info.setProperty("os.name", System.getProperty("os.name"))
+        info.setProperty("user.country", System.getProperty("user.country"))
+        info.setProperty("java.version", System.getProperty("java.version"))
+
+        def writer = new File("build.properties").newWriter("utf-8")
+        info.store(writer, "JPF core build info")
+        writer.close()
+    }
+}
+
+task copyResources(type: Copy) {
+    group = "JPF Build Resources"
+    description = "Copies .version and build.properties files to the build directory."
+
+    dependsOn generateBuildInfo, generateVersion
+
+    from "build.properties"
+    into sourceSets.main.output.classesDirs.asPath + "/gov/nasa/jpf"
+
+    from ".version"
+    into sourceSets.main.output.classesDirs.asPath + "/gov/nasa/jpf"
+}
+
+// Ensure resources are copied before compilation
+tasks.named('compileJava') { dependsOn copyResources }
+tasks.named('compileTestJava') { dependsOn copyResources }
+tasks.named('processResources') { dependsOn copyResources }
+tasks.named('jar') { dependsOn copyResources }
+
+// -------------------
+// Compilation and Jars
+// -------------------
 task compile {
     group = "JPF Build"
     description = "Compiles all JPF core sources."
-
-    // These are automatic generated tasks from the Java Gradle Plugin.
-    // Gradle is able to infer the order of the source sets
-    // due to the compileClasspath attribute
     dependsOn compileTestJava
-    dependsOn compileExamplesJava
 }
 
 task createJpfClassesJar(type: Jar) {
-    archiveName = "jpf-classes.jar"
-    destinationDir = file("${buildDir}")
-
-    group = "JPF Jars"
-    description = "Creates the ${archiveName} file."
-
-    dependsOn compile
-    dependsOn copyResources
-
-    from sourceSets.classes.java.outputDir
-    from sourceSets.annotations.java.outputDir
-    from(sourceSets.main.java.outputDir) {
+    archiveFileName = "jpf-classes.jar"
+    destinationDirectory = file("${buildDir}")
+    dependsOn compile, copyResources
+    from sourceSets.classes.output
+    from sourceSets.annotations.output
+    from(sourceSets.main.output) {
         include "gov/nasa/jpf/JPFShell.class"
         include "gov/nasa/jpf/vm/Verify.class"
         include "gov/nasa/jpf/util/TypeRef.class"
@@ -79,22 +161,15 @@ task createJpfClassesJar(type: Jar) {
 }
 
 task createJpfJar(type: Jar) {
-    archiveName = "jpf.jar"
-    destinationDir = file("${buildDir}")
-
-    group = "JPF Jars"
-    description = "Creates the ${archiveName} file."
-
-    dependsOn compile
-    dependsOn copyResources
-
-    from sourceSets.main.java.outputDir
-    from sourceSets.peers.java.outputDir
-    from sourceSets.annotations.java.outputDir
-    from(sourceSets.classes.java.outputDir) {
+    archiveFileName = "jpf.jar"
+    destinationDirectory = file("${buildDir}")
+    dependsOn compile, copyResources
+    from sourceSets.main.output
+    from sourceSets.peers.output
+    from sourceSets.annotations.output
+    from(sourceSets.classes.output) {
         include "org/junit/*.class"
     }
-
     manifest {
         attributes "Implementation-Title": "Java Pathfinder core system"
         from manifestCommonAttrbutes
@@ -102,44 +177,26 @@ task createJpfJar(type: Jar) {
 }
 
 task createAnnotationsJar(type: Jar) {
-    archiveName = "jpf-annotations.jar"
-    destinationDir = file("${buildDir}")
-
-    group = "JPF Jars"
-    description = "Creates the ${archiveName} file."
-
-    dependsOn compile
-    dependsOn copyResources
-
-    from sourceSets.annotations.java.outputDir
+    archiveFileName = "jpf-annotations.jar"
+    destinationDirectory = file("${buildDir}")
+    dependsOn compile, copyResources
+    from sourceSets.annotations.output
 }
 
 task createClassloaderSpecificTestsJar(type: Jar) {
-    archiveName = "classloader_specific_tests.jar"
-    destinationDir = file("${buildDir}")
-
-    group = "JPF Jars"
-    description = "Creates the ${archiveName} file."
-
-    dependsOn compile
-    dependsOn copyResources
-
-    from(sourceSets.test.java.outputDir) {
+    archiveFileName = "classloader_specific_tests.jar"
+    destinationDirectory = file("${buildDir}")
+    dependsOn compile, copyResources
+    from(sourceSets.test.output) {
         include "classloader_specific_tests/*.class"
     }
 }
 
 task createRunJpfJar(type: Jar) {
-    archiveName = "RunJPF.jar"
-    destinationDir = file("${buildDir}")
-
-    description = "Creates the ${archiveName} file."
-    group = "JPF Jars"
-
-    dependsOn compile
-    dependsOn copyResources
-
-    from(sourceSets.main.java.outputDir) {
+    archiveFileName = "RunJPF.jar"
+    destinationDirectory = file("${buildDir}")
+    dependsOn compile, copyResources
+    from(sourceSets.main.output) {
         include "gov/nasa/jpf/tool/Run.class"
         include "gov/nasa/jpf/tool/RunJPF.class"
         include "gov/nasa/jpf/Config.class"
@@ -165,16 +222,10 @@ task createRunJpfJar(type: Jar) {
 }
 
 task createRunTestJar(type: Jar) {
-    archiveName = "RunTest.jar"
-    destinationDir = file("${buildDir}")
-
-    description = "Creates the ${archiveName} file."
-    group = "JPF Jars"
-
-    dependsOn compile
-    dependsOn copyResources
-
-    from(sourceSets.main.java.outputDir) {
+    archiveFileName = "RunTest.jar"
+    destinationDirectory = file("${buildDir}")
+    dependsOn compile, copyResources
+    from(sourceSets.main.output) {
         include "gov/nasa/jpf/tool/Run.class"
         include "gov/nasa/jpf/tool/RunTest.class"
         include "gov/nasa/jpf/tool/RunTest\$Failed.class"
@@ -201,42 +252,30 @@ task createRunTestJar(type: Jar) {
 task buildJars {
     group = "JPF Build"
     description = "Generates all core JPF jar files."
-
-    dependsOn createClassloaderSpecificTestsJar
-    dependsOn createAnnotationsJar
-    dependsOn createJpfClassesJar
-    dependsOn createJpfJar
-    dependsOn createRunJpfJar
-    dependsOn createRunTestJar
-    dependsOn copyLibs
+    dependsOn createClassloaderSpecificTestsJar, createAnnotationsJar, createJpfClassesJar, createJpfJar, createRunJpfJar, createRunTestJar, copyLibs
 }
 
+// -------------------
+// Testing
+// -------------------
 test {
     description = "Runs core regression tests."
-
     dependsOn buildJars
-
     forkEvery = 1
     enableAssertions = true
     maxHeapSize = "1024m"
-
     include "**/*Test.class"
-    exclude "**/SplitInputStreamTest.class"
-    exclude "**/JPF_*.class"
-
+    exclude "**/SplitInputStreamTest.class", "**/JPF_*.class"
     testLogging {
         events "passed", "skipped", "failed"
     }
-
     afterSuite { testDescriptor, result ->
         if (!testDescriptor.parent) {
             println "Test Execution: ${result.resultType}"
-
             def summaryFields = ["${result.testCount} tests",
                                  "${result.successfulTestCount} passed",
                                  "${result.failedTestCount} failed",
                                  "${result.skippedTestCount} skipped"]
-
             println("Summary: " + summaryFields.join(", "))
         }
     }
@@ -247,23 +286,21 @@ def PolDetJPFClasspath = "${buildDir}/tests:" + configurations.testRuntimeClassp
 task testPolDet(type: Exec) {
     group = "PolDet@JPF"
     description = "Run PolDet on example tests."
-
     dependsOn buildJars
-
     commandLine 'java', '-jar', "${buildDir}/RunJPF.jar", "+classpath=${PolDetJPFClasspath}", "PolDetMain", "PolDetExamples"
 }
 
 task runPolDet(type: Exec) {
     group = "PolDet@JPF"
     description = "Run PolDet on a given test class."
-
     dependsOn buildJars
-
-    def JPFClasspath = "${PolDetJPFClasspath}:" + project.findProperty("testClasspath") ?: ""
-
+    def JPFClasspath = "${PolDetJPFClasspath}:" + (project.findProperty("testClasspath") ?: "")
     commandLine 'java', '-jar', "${buildDir}/RunJPF.jar", "+classpath=${JPFClasspath}", "PolDetMain", project.findProperty("testClass") ?: ""
 }
 
+// -------------------
+// Publishing
+// -------------------
 publishing {
     publications {
         jpfCore(MavenPublication) {
@@ -284,7 +321,4 @@ publishing {
     }
 }
 
-
 defaultTasks "buildJars"
-
-
