@@ -1,4 +1,4 @@
-* [Wiki Home](Home)
+* [Wiki Home](index)
 * [Introduction](Introduction)
     * [What is JPF?](What-is-JPF)
     * [Testing vs. Model Checking](Testing-vs.-Model-Checking)
@@ -46,12 +46,12 @@
 ---
 * [JPF core project](JPF-core)
 ---
-* [Google Summer of Code 2022](_gsoc/JPF-Google-Summer-of-Code-2022/)
-    * [Project Ideas](_gsoc/GSoC-2022-Project-Ideas/)
+* [Google Summer of Code 2022](JPF-Google-Summer-of-Code-2022)
+    * [Project Ideas](GSoC-2022-Project-Ideas)
 ---
 * [Online JPF Day 2021](JPF-Day-2021-(Online))
 ---
-* [Google Summer of Code 2021](_gsoc/JPF-Google-Summer-of-Code-2021/)
+* [Google Summer of Code 2021](JPF-Google-Summer-of-Code-2021)
 ---
 * [Online JPF Day 2020](JPF-Online-Day-2020)
 ---

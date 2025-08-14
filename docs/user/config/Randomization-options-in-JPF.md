@@ -11,5 +11,3 @@ The randomization options in JPF allow the user to experiment in randomizing the
  * `def`: No randomization, choices are explored using the default search order imposed by the model checker. 
 
 `cg.seed (_INT_)`: The user can specify a particular seed for the random number generator in order to obtain reproducible results in the presence of randomization. Note that this is effective only when the `path` option of `randomize_choices` is selected. 
-
-
