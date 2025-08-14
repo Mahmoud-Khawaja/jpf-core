@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 Justin Lloyd and Elena Sherman. **Minimizing the Size of Path Conditions Using Convex Polyhedra Abstract Domain**
 
 Jaideep Ramachandran, Corina Pasareanu and Thomas Wahl. **Symbolic Execution for Checking the Accuracy of Floating-Point Programs**

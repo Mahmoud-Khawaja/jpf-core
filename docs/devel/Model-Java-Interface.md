@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Purpose ##
 
 Even if it is just a Java application (i.e. solely consists of Java classes), JPF can be viewed as a Java Virtual Machine (JVM) in itself. The consequence is that (*.class) class files, and even the same files at times, are processed in two different ways in a JVM running JPF

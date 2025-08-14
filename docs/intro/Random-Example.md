@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Example: `java.util.Random` #
 
 We start with a simple example that uses java.util.Random. Consider the following program that obtains two random values in (2) and (3), and then performs some computation (4) with them.

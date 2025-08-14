@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Accepted Projects
 
 | Title | Student | University | Mentor | Co-mentors |

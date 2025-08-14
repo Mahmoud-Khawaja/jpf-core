@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Running JPF within eclipse ##
 
 To run JPF in eclipse after building 

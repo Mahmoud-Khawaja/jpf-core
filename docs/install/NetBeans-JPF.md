@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # netbeans-jpf #
 
 This is a plugin to launch JPF on selected application properties (*.jpf) files from within NetBeans. No worries, this is a minimal plugin that mainly starts an external process (JPF), so it doesn't muck with your NetBeans views.

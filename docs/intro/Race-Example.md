@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Example: Data Race #
 
 That's nice, but of course we also could have provoked the error in our random value example by using explicit loops instead of the `Random.nextInt()` calls, i.e. by explicitly enumerating all possible `a` and `b` values in our program. This would be typically done in a program that is a dedicated test driver, in a process which is called *systematic testing*. However, the program we want to verify might not be a test driver, and we might not even have the sources so that we could modify it accordingly.

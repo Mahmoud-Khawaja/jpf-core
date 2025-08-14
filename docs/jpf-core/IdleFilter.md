@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # IdleFilter #
 
 The `gov.nasa.jpf.listener.IdleFilter` is a listener that can be used to close state spaces with loops. Consider a simple "busy waiting" loop

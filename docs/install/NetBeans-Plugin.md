@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Installing the NetBeans JPF plugin #
  1. Download and install [jpf-core](Home)
  2. -------------- take a break ---------------

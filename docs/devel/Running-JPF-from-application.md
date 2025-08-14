@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Embedded JPF #
 JPF can also be used embedded, i.e. called from another Java application. A basic code sequence to start JPF looks like this:
 

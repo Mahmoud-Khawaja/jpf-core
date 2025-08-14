@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## CALL FOR PAPERS
 
 **Java Pathfinder Workshop 2016**  

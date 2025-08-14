@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 This section is where the real fun starts. Here you learn about
 
   - [Different applications of JPF](Different-applications-of-JPF)

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 jpf-core currently builds and runs on Java 8. In this work, we introduced partial support for Java 10, leveraging the new features like modularity, strong encapsulation, while also handling the deprecates and removes. 
 
 JEPs that introduce internal changes to JPF include, but not limited to:

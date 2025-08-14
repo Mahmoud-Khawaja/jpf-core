@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 So what JPF does is test our program for defects? No, it usually does more, at least when used as a model checker. How does testing differ from model checking?
 
 Software testing is an empirical set of techniques where you execute your program with a number of inputs in order to find out if it behaves correctly. This comes with two parts that involve the right choices: test input and test oracle.

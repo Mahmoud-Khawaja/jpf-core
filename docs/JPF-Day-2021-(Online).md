@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- JPF 2021 - December 4 - *online*-->
 
 <!--## Call for participation-->

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Projects ##
 There are a number of currently active projects that use JPF, as well as legacy code.
 

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # JPF Key Features #
 
 By now, it should be clear that JPF is not just a model checker: it is a JVM that can be used for model checking. However, if you are familiar with formal methods, you might want to know what kind of model checking methods and features are supported.

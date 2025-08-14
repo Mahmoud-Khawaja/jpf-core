@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Mangling for MJI #
 ## Mangling Methods ##
 Suppose your method looks like 

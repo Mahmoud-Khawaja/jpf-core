@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # The JPF Report API #
 The JPF report system consists of three major components: 
 

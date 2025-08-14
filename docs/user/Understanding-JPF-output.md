@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 There are three different ways a JPF run can produce output, each of them with a different purpose, but all controlled by the [general JPF configuration mechanism](Configuring-JPF):
 
   1. System under test output - what is the SUT doing?\

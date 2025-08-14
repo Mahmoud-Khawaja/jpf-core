@@ -1,9 +1,10 @@
-<!-- File: docs/_includes/navigation.html -->
 <nav class="site-navigation">
     <ul class="nav-menu">
         {% for item in site.navigation %}
-        <li class="nav-item">
-            <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        {% assign item_path = item.url | relative_url %}
+        {% assign current = page.url == item.url or page.url == item_path %}
+        <li class="nav-item{% if current %} active{% endif %}">
+            <a href="{{ item_path }}">{{ item.title }}</a>
         </li>
         {% endfor %}
     </ul>

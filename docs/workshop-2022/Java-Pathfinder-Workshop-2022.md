@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 The goal of the workshop is to highlight current research and tools development for Java/Android program verification and analysis. Although the workshop’s theme revolves around the JPF tool, e.g., use of JPF to support basic research, tool development, or in verification case studies, we also welcome contributions related to program analysis of Java/Android applications. The workshop will serve as a platform to grow the community of researchers, foster collaboration and define future directions for JPF development and Java/Android program analysis research.
 
 > Check our [Twitter](https://twitter.com/Java_Pathfinder) account for the latest news and updates!

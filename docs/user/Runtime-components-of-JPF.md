@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # JPF components #
 Java is more than a programming language. It is a set of layers that starts with a platform specific VM implementation (which is referred to as the *host VM*) that sits on top of native libraries written for and using your operating system. To this stack, we add JPF - a Java application that runs on top of the "host VM", but is itself a VM which then executes your System Under Test (SUT).
 

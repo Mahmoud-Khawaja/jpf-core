@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 * [Wiki Home](index)
 * [Introduction](Introduction)
     * [What is JPF?](What-is-JPF)

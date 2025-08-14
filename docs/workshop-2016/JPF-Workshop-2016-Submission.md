@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Submission
 
 [EasyChair submission page](https://easychair.org/conferences/?conf=jpf2016)

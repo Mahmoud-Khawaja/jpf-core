@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Ideas: [[GSoC 2025 Project Ideas]]
 
 <!--The Java Pathfinder (JPF) team will apply again as a mentor organization for the [Google Summer of Code](https://summerofcode.withgoogle.com/) (GSoC) program this year 2025.-->

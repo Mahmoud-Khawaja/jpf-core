@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # AssertionProperty #
 
 This listener adds some special capabilities for `java.lang.AssertionError` processing:

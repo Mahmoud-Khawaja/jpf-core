@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <div id="footerContent" style="text-align: center;"><pdf:pagenumber></pdf:pagenumber></div>
 
 Java Pathfinder (JPF) is here again in 2011\. We are planning to participate with a number of exciting projects as part of Google Summer of Code (GSoC) 2011\. If you are new to the Google Summer of Code program, this is an annual event where Google sponsors students to work on selected open source projects, each student being supported by an experienced mentor. Projects have about 3 month scope, carry a relatively low administrative overhead, can be done remotely, and are generally fun. You also get a cool t-shirt, so what's not to like.

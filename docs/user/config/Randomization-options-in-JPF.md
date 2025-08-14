@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Randomization Options in JPF ##
 
 The randomization options in JPF allow the user to experiment in randomizing the order of choices explored. 

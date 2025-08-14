@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Running JPF from within Eclipse using eclipse-jpf #
 
 eclipse-jpf can be easily configured to run JPF from within Eclipse

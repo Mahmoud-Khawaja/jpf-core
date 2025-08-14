@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # The Attribute System #
 
 While JPF stores values for operands, local variables and fields very similar to a normal VM, it also features a storage extension mechanism that lets you associate arbitrary objects with stack slots (operands and locals), fields, and whole objects (ElementInfos). The attribute objects can be set/used in [native peers](Model-Java-Interface) or [listeners](Listeners) to add state stored/restored information that automatically follows the data flow.

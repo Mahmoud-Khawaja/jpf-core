@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 As a complex runtime system for (almost) arbitrary Java programs, it goes without saying that JPF needs a lot of regression tests. You can find these under the `src/tests` directories in (hopefully) all JPF projects. All tests follow the same scheme, which is motivated by the need to run tests in a number of different ways:
 
   1. as part of the Gradle-based build system, as configures in `build.gradle`;

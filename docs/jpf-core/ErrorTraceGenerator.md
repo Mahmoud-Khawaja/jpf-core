@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Error Trace Generator ##
 
 This is a listener to output a lightweight error trace. It prints the instructions at POR boundaries or points where there are multiple choices. An example is shown below.  

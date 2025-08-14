@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # JPF Top-level Design #
 
 JPF was designed around two major abstractions: (1) the *VM*, and (2) the *Search* component.

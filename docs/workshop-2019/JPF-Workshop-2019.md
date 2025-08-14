@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 This year, the workshop is co-located with [ASE](https://2019.ase-conferences.org/) in San Diego, Florida, United States on November 15, 2019. The main workshop webpage is [here](https://2019.ase-conferences.org/home/jpf-2019).
 
 The goal of the workshop is to highlight research and tools for Java/Android program verification and analysis. Although there is a particular emphasis on the JPF tool, and on projects that use JPF to support basic research, tool development, or verification case studies, the workshop also welcomes contributions related to general program analysis of Java/Android programs. The hope is to use the workshop to grow the community of researchers investigating Java, Android, and JPF in an effort to foster collaboration and define future needs for program analysis of Java/Android.

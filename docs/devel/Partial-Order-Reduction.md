@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # On-the-fly Partial Order Reduction #
 
 The number of different scheduling combinations is the prevalent factor for the state space size of concurrent programs. Fortunately, for most practical purposes it is not necessary to explore all possible instruction interleavings for all threads. The number of scheduling induced states can be significantly reduced by grouping all instruction sequences in a thread that cannot have effects outside this thread itself, collapsing them into a single transition. This technique is called partial order reduction (POR), and typically results in more than 70% reduction of state spaces.

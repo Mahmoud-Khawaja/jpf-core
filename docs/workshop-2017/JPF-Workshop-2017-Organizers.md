@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Program Chairs
 * [Nastaran Shafiei](https://ti.arc.nasa.gov/profile/nshafiei/), NASA Ames Research Center
 * [Darko Marinov](http://mir.cs.illinois.edu/marinov/), University of Illinois at Urbana-Champaign

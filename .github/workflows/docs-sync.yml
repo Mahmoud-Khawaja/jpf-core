@@ -6,27 +6,29 @@ on:
       - main
       - master
       - add-install-docs
+      - alt-docs
     paths:
       - "docs/**"
   workflow_dispatch:
 
 permissions:
   contents: read
+  pages: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout jpf-core source (your docs)
+      # 1. Checkout this jpf-core repo (where your docs live)
       - name: Checkout source repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           path: source
 
-      # 2. Checkout your Pages repo
-      - name: Checkout GitHub Pages repository
+      # 2. Checkout your GitHub Pages repo
+      - name: Checkout Pages repository
         uses: actions/checkout@v4
         with:
           repository: Mahmoud-Khawaja/Mahmoud-Khawaja.github.io
@@ -34,27 +36,27 @@ jobs:
           ref: main
           path: target
 
-      # 3. Prepare a clean target directory
+      # 3. Clean and recreate the jpf-core folder in the Pages repo
       - name: Prepare target directory
         run: |
           rm -rf target/jpf-core
           mkdir -p target/jpf-core
 
-      # 4. Copy all docs (including graphics)
+      # 4. Copy everything from docs/ into target/jpf-core/
       - name: Copy documentation files
         run: |
-          cp -r source/docs/* target/jpf-core/
+          cp -a source/docs/. target/jpf-core/
 
-      # 5. Commit & push if there are changes
+      # 5. Commit & push only if there are changes
       - name: Commit and push changes
+        working-directory: target
         run: |
-          cd target
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          if git diff --staged --quiet; then
+          git add jpf-core
+          if git diff --quiet --staged; then
             echo "No changes to deploy"
             exit 0
           fi
-          git commit -m "Update JPF-core documentation from commit ${{ github.sha }}"
+          git commit -m "Update JPF-core docs from ${{ github.ref }} @ ${{ github.sha }}"
           git push origin main

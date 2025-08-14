@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <div id="footerContent" style="text-align: center;"><pdf:pagenumber></pdf:pagenumber></div>
 
 # JPF and Google Summer of Code 2012

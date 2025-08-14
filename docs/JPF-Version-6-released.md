@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Version 6 Released 
 I have just pushed a new major jpf-core release to the babelfish repo - v5 is dead, long live v6. Welcome to a new internal design - and a whole new set of bugs: I expect this will take some time to consolidate.
 

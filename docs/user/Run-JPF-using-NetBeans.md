@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Running JPF from within NetBeans without JPF plugin #
 
 Please Note that the following description assumes NetBeans "freeform projects". In general, it is much better to use the JPF plugins, which not only make the configuration steps described below obsolete, but also work with other NetBeans project types.

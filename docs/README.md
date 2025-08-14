@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Java Pathfinder wiki repository
 
 This repository is a mirror of the wiki contents. By having a separate

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- This version of "Downloading sources" came from https://github.com/jeandersonbc/jpf-core/wiki/Downloading-sources-->
 # JPF Source Repository Access #
 

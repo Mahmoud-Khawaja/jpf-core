@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 This page is from 2018. In case you are looking for 2019:
 
 # [[JPF Google Summer of Code 2019]]

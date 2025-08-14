@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 This year the workshop is a satelite workshop with
 [FSE](http://www.cs.ucdavis.edu/fse2016/) in Seattle, WA, on November
 18 2016. The goal of the workshop in 2016 is to highlight research and

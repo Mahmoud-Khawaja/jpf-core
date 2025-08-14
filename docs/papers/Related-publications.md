@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Related Publications #
 
 JPF has been both a research target and a system in use for a number of years. A broad collection of papers and reports is available, including the following (incomplete) list

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Program chairs:
 
 - Milos Gligoric, University of Texas at Austin

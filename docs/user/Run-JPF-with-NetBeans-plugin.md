@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Running JPF from within NetBeans with netbeans-jpf plugin #
 netbeans-jpf can be easily configured to run JPF at the click of a mouse.
 

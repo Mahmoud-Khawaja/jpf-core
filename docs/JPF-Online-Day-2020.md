@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 Since 2008, ten times the Java PathFinder (JPF) workshop has been organized. Given the current pandemic, in 2020 we will organize a JPF day instead. On Saturday, November 7, two Zoom sessions will be held (11:00-13:00 UTC and 15:00-17:00 UTC).
 
 For the JPF day, we solicit presentations on research and applications related to JPF and its extensions, including work in progress. If the underlying research idea has been presented in another venue, the one-page abstract needs to clarify the novel aspects that are being presented. We also welcome comparative analysis presentations that evaluate algorithms in JPF or its extensions with other relevant tools. The goal of the JPF day is to encourage the flow of ideas relevant to JPF and Java (byte)code analysis in general.

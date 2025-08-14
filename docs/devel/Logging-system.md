@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # The JPF Logging API #
 There is one simple rule: do not use `System.out` or `System.err` for any permanent logging
 

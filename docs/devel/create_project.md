@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Creating a New JPF Module #
 
 So what do you have to do to create a new JPF module? For a quick shortcut to setting up *most* things,  use the `create_project` script of the [jpf-template module](wiki:projects/jpf-template).  

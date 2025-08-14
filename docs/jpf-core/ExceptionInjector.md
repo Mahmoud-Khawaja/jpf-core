@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # ExceptionInjector #
 
 The ExceptionInjector is a listener that can throw user configured exceptions at arbitrary program locations. The main purpose is to ease the testing of exception handler code that would otherwise hard to reach, e.g. because it is not clear if/how an exception could be thrown in 3rd party code.

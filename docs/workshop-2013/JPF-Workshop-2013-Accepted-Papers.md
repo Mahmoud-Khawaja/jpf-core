@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ### Full papers
 Benjamin Hillery, Eric Mercer, Neha Rungta and Suzette Person. **Towards a Lazier Symbolic PathFinder**
 

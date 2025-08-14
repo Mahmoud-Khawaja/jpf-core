@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 That depends on how you configure it. 
 First and foremost, there is no single, monolithic JPF - it is a runtime configured combination of different components. The project *jpf-core* is the essential component that constitutes the core structure of JPF. 
 Here we explain what *jpf-core* is.

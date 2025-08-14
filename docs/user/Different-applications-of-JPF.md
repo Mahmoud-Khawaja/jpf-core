@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # JPF Application Goals and Types #
 
 By now, you already know that you run JPF on compiled Java programs, just like a normal VM. But what are the goals to apply JPF, and - based on these goals - what are the different JPF application types?

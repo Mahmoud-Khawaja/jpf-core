@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # <img src="https://avatars.githubusercontent.com/u/23702826?s=280&v=4" width="84" height="84"> Java Pathfinder 
 This is the main page for Java™ Pathfinder (JPF). JPF is an extensible software model checking framework for Java™ bytecode programs. The system was developed at the [NASA Ames Research Center](https://www.nasa.gov/centers/ames/about/index.html), open sourced in 2005, and is freely available on this server under the [Apache-2.0 license](http://www.apache.org/licenses/LICENSE-2.0).
 

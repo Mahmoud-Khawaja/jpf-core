@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Ideas: [[GSoC 2020 Project Ideas]]
 
 The Java Pathfinder (JPF) team is a mentor organization for the [Google Summer of Code](https://summerofcode.withgoogle.com/) (GSoC) program for 2020. The GSoC program, is a program where Google sponsors university students to write code for open source projects at selected mentoring organizations. Each student is guided by a mentor throughout the program. The length of the program is about four months, and it can be done remotely, and it is generally fun. You can learn about the program rules and your eligibility [here](https://summerofcode.withgoogle.com/rules/).

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 The Java Pathfinder (JPF) team is applying to the [Google Summer of Code](https://developers.google.com/open-source/gsoc/) (GSoC) program for 2016. If you are new to the GSoC program, this is an annual global event where Google sponsors university students to write code for selected open source projects where each student is supported by an experienced mentor. Projects have about a three month scope, carry a relatively low administrative overhead, can be done remotely, and are generally fun.
 
 ## Java Pathfinder ##

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Summer Project Summit 2010
 This years summer summit is going to take place on Friday, August 13th at the ​Googleplex in Mountain View, CA. (the date explains why we couldn't meet at NASA - "..it comes after 12, Hon..").
 

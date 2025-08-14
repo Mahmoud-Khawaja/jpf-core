@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Java ##
 Most of the JPF components, including the [jpf-core](JPF-core), are pure Java applications. The oldest version supported is Java SE 8 (in `java-8` branch) and the latest Java version supported is Java SE 11 (in `master` branch).
 

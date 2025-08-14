@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # JPF Runtime Modules #
 
 JPF is partitioned into separate projects that all follow the same directory layout and build process. Modules can be distributed as source or binary distributions. Binary distributions are just slices through the directory tree of a source distribution that preserve the permanent build artifact, i.e. both distribution forms are runtime-compatible.
