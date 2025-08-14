@@ -1,7 +1,7 @@
 <nav class="site-navigation">
     <ul class="nav-menu">
         {% for item in site.navigation %}
-        {% assign item_path = item.url | relative_url %}
+        {% assign item_path = site.baseurl | append: item.url | relative_url %}
         {% assign current = page.url == item.url or page.url == item_path %}
         <li class="nav-item{% if current %} active{% endif %}">
             <a href="{{ item_path }}">{{ item.title }}</a>

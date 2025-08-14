@@ -1,4 +1,3 @@
-<!-- File: docs/_layouts/default.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | default: site.title }} | Java PathFinder Documentation</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ site.baseurl }}{{ '/assets/css/style.css' | relative_url }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -18,7 +17,7 @@
   <div class="header-container">
     <!-- Brand -->
     <div class="header-brand">
-      <a href="{{ '/' | relative_url }}{{ site.baseurl }}" class="brand-link">
+      <a href="{{ site.baseurl }}/" class="brand-link">
         <i class="fas fa-code-branch"></i>
         <span>{{ site.title }}</span>
       </a>

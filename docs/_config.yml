@@ -1,5 +1,9 @@
+# docs/_config.yml
+
 title: Java PathFinder Documentation
 description: JPF is an extensible software model checking framework for Java bytecode programs
+
+# Your Pages site is served at https://mahmoud-khawaja.github.io/jpf-core/
 baseurl: "/jpf-core"
 url: "https://mahmoud-khawaja.github.io"
 
@@ -9,35 +13,65 @@ highlighter: rouge
 plugins:
   - jekyll-relative-links
 
-# Navigation menu
+# Navigation menu (url paths are relative to baseurl)
 navigation:
   - title: "Home"
-    url: "/jpf-core/"
+    url: "/"
   - title: "Introduction"
-    url: "/jpf-core/intro/"
+    url: "/intro/"
   - title: "Installation"
-    url: "/jpf-core/install/"
+    url: "/install/"
   - title: "User Guide"
-    url: "/jpf-core/user/"
+    url: "/user/"
   - title: "JPF Core Project"
-    url: "/jpf-core/jpf-core/"
+    url: "/jpf-core/"
   - title: "Developer Guide"
-    url: "/jpf-core/devel/"
-  - title: "Google Summer of Code"
-    url: "/jpf-core/Google-Summer-of-Code.md"
-  - title: "Workshops"
-    url: "/jpf-core/JPF-Workshops.md"
+    url: "/devel/"
+  - title: "GSoC 2016"
+    url: "/gsoc-2016/"
+  - title: "GSoC 2017"
+    url: "/gsoc-2017/"
+  - title: "GSoC 2018"
+    url: "/gsoc-2018/"
+  - title: "GSoC 2019"
+    url: "/gsoc-2019/"
+  - title: "GSoC 2020"
+    url: "/gsoc-2020/"
+  - title: "GSoC 2021"
+    url: "/gsoc-2021/"
+  - title: "GSoC 2022"
+    url: "/gsoc-2022/"
+  - title: "GSoC 2023"
+    url: "/gsoc-2023/"
+  - title: "GSoC 2024"
+    url: "/gsoc-2024/"
+  - title: "GSoC 2025"
+    url: "/gsoc-2025/"
+  - title: "Workshops 2013"
+    url: "/workshop-2013/"
+  - title: "Workshops 2014"
+    url: "/workshop-2014/"
+  - title: "Workshops 2016"
+    url: "/workshop-2016/"
+  - title: "Workshops 2017"
+    url: "/workshop-2017/"
+  - title: "Workshops 2018"
+    url: "/workshop-2018/"
+  - title: "Workshops 2019"
+    url: "/workshop-2019/"
+  - title: "Workshops 2022"
+    url: "/workshop-2022/"
   - title: "Projects"
-    url: "/jpf-core/projects/"
+    url: "/projects/"
 
-# Exclude files and folders that shouldn't be processed
+# Don’t process these wiki-helper files or archives
 exclude:
   - README.md
   - docs/_Sidebar.md
   - docs/_Footer.md
-  - docs/graphics
+  - docs/graphics/**
   - docs/Call-for-JPF-*.md
   - docs/Downloading-sources-(OLD).md
 
-# Optional: if you want to customize the permalink style globally
+# Use pretty permalinks (folder/index.html)
 permalink: pretty
