@@ -2,7 +2,7 @@
 layout: default
 title: Developer Guide
 description: Under-the-hood details for extending and contributing to JPF.
-permalink: /devel/
+permalink: /jpf-core/devel/
 ---
 
 
@@ -12,25 +12,25 @@ From the previous sections, you know that JPF is a collection of interchangeable
 
 ## Core Mechanisms
 
-- [ChoiceGenerators](ChoiceGenerators.html) – Non-deterministic choice handling
-- [Partial Order Reduction](Partial-Order-Reduction.html) – State-space optimization
-- [Slot and Field Attributes](Slot-and-field-attributes.html) – Custom data storage
+- [ChoiceGenerators](ChoiceGenerators/) – Non-deterministic choice handling
+- [Partial Order Reduction](Partial-Order-Reduction/) – State-space optimization
+- [Slot and Field Attributes](Slot-and-field-attributes/) – Custom data storage
 
 ## Extension Mechanisms
 
-- [Listeners](Listeners.html) – Event-driven JPF extensions
-- [Search Strategies](Search-Strategies.html) – Custom exploration algorithms
-- [Model Java Interface (MJI)](Model-Java-Interface.html) – Native method modeling
-- [Bytecode Factories](Bytecode-Factories.html) – Custom instruction implementations
+- [Listeners](Listeners/) – Event-driven JPF extensions
+- [Search Strategies](Search-Strategies/) – Custom exploration algorithms
+- [Model Java Interface (MJI)](Model-Java-Interface/) – Native method modeling
+- [Bytecode Factories](Bytecode-Factories/) – Custom instruction implementations
 
 ## Utilities
 
-- [Logging System](Logging-system.html) – JPF’s logging infrastructure
-- [Reporting System](Reporting-System.html) – Output and result reporting
-- [Running JPF from Application](Running-JPF-from-application.html) – Embedding JPF
+- [Logging System](Logging-system/) – JPF’s logging infrastructure
+- [Reporting System](Reporting-System/) – Output and result reporting
+- [Running JPF from Application](Running-JPF-from-application/) – Embedding JPF
 
 ## Development Process
 
-- [Coding Conventions](Coding-convention.html) – JPF coding standards
-- [Creating Projects](create_project.html) – New JPF project setup
-- [Modules](modules.html) – JPF module architecture  
+- [Coding Conventions](Coding-convention/) – JPF coding standards
+- [Creating Projects](create_project/) – New JPF project setup
+- [Modules](modules/) – JPF module architecture  

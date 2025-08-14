@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Google Summer of Code
-permalink: /gsoc/
+permalink: /jpf-core/gsoc/
 ---
 
 # JPF & Google Summer of Code

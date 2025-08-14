@@ -1,7 +1,7 @@
 ---
 layout: page
 title: JPF Workshops
-permalink: /workshops/
+permalink: /jpf-core/workshops/
 ---
 
 
